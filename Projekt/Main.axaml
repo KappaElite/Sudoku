@@ -1,0 +1,196 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Projekt.Main"
+        Title="Sudoku">
+    
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <TextBlock x:Name = "DifficultyText" Text="Difficulty Level:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <ComboBox x:Name="DifficultyComboBox" Width="120" SelectedIndex="0">
+                <ComboBoxItem>Easy</ComboBoxItem>
+                <ComboBoxItem>Hard</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        
+        <TextBlock x:Name="HintsAvailableText" 
+                   Text="Hints Available: 5" 
+                   HorizontalAlignment="Center" 
+                   Margin="0,0,0,20" 
+                   FontSize="14" 
+                   IsVisible="False"
+                   Foreground="Gray"/>
+        
+        
+        <Button x:Name="StartButton" 
+                Content="Start" 
+                HorizontalAlignment="Center" 
+                Margin="0,0,0,20"
+                Padding="20,10"
+                FontSize="16"
+                Click="OnStartButtonClicked"/>
+        
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+            <Button x:Name="ShowAnswerButton" 
+                    Content="Show Answer" 
+                    HorizontalAlignment="Center"
+                    Padding="20,10"
+                    FontSize="16"
+                    IsVisible="False"
+                    Click="OnShowAnswerButtonClicked"/>
+
+            <Button x:Name="CheckButton" 
+                    Content="Check answer" 
+                    HorizontalAlignment="Center"
+                    Padding="20,10"
+                    FontSize="16"
+                    IsVisible="False"
+                    Click="OnCheckAnswerButtonClicked"/>
+            
+            
+            <Button x:Name="HintButton" 
+                    Content="Show Hint" 
+                    HorizontalAlignment="Center"
+                    Padding="20,10"
+                    FontSize="16"
+                    IsVisible="False"
+                    Click="OnShowHintButtonClicked"/>
+        </StackPanel>
+    
+        
+        
+        
+        <Grid Background="White">
+            <Border BorderBrush="Black" BorderThickness="3" Padding="15">
+                <Grid Width="500" Height="500">
+                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                       
+                        <Rectangle Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Width="3" HorizontalAlignment="Left" Fill="Black" Margin="-1.5,0"/>
+                        <Rectangle Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Width="3" HorizontalAlignment="Left" Fill="Black" Margin="-1.5,0"/>
+                        
+                     
+                        <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Height="3" VerticalAlignment="Top" Fill="Black" Margin="0,-1.5"/>
+                        <Rectangle Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Height="3" VerticalAlignment="Top" Fill="Black" Margin="0,-1.5"/>
+                    </Grid>
+
+                  
+                    <UniformGrid x:Name="SudokuUniformGrid" Rows="9" Columns="9">
+                        <TextBox Tag="0,0" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="0,1" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="0,2" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="0,3" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="0,4" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="0,5" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="0,6" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="0,7" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="0,8" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+
+                        
+                        <TextBox Tag="1,0" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="1,1" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="1,2" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="1,3" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="1,4" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="1,5" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="1,6" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="1,7" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="1,8" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+
+                        
+                        <TextBox Tag="2,0" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="2,1" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="2,2" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="2,3" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="2,4" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="2,5" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="2,6" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="2,7" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="2,8" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+
+                        
+                        <TextBox Tag="3,0" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="3,1" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="3,2" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="3,3" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="3,4" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="3,5" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="3,6" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="3,7" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="3,8" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+
+                      
+                        <TextBox Tag="4,0" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="4,1" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="4,2" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="4,3" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="4,4" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="4,5" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="4,6" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="4,7" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="4,8" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+
+                        
+                        <TextBox Tag="5,0" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="5,1" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="5,2" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="5,3" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="5,4" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="5,5" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="5,6" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="5,7" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="5,8" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+
+                        
+                        <TextBox Tag="6,0" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="6,1" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="6,2" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="6,3" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="6,4" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="6,5" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="6,6" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="6,7" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="6,8" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+
+                       
+                        <TextBox Tag="7,0" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="7,1" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="7,2" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="7,3" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="7,4" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="7,5" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="7,6" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="7,7" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="7,8" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+
+                        
+                        <TextBox Tag="8,0" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="8,1" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="8,2" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="8,3" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="8,4" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="8,5" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="8,6" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="8,7" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                        <TextBox Tag="8,8" Margin="5" MaxLength="1" FontSize="24" TextAlignment="Center" BorderThickness="1"/>
+                    </UniformGrid>
+                </Grid>
+            </Border>
+        </Grid>
+    </StackPanel>
+</Window>
